@@ -1,0 +1,14 @@
+/bootstrap/compiled.php
+/public/storage
+
+/vendor
+/node_modules
+
+/.idea
+*.iml
+
+/.vagrant
+Homestead.json
+Homestead.yaml
+
+.env

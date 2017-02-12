@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~     Vertretungsplan Android App
+  ~     Copyright (C) 2017  GameplayJDK
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+    <string name="app_name">Vertretungsplan</string>
+    <string name="title_activity_item_list">@string/app_name</string>
+
+    <string name="navigation_drawer_close">Seitenmenü schließen</string>
+    <string name="navigation_drawer_open">Seitenmenü öffnen</string>
+
+    <string name="menu_select_class">Klasse wählen…</string>
+    <string name="menu_about">Über</string>
+
+    <string name="nav_last_time">Nie</string>
+
+    <string name="nav_class">Klassen</string>
+
+    <string name="tab_current">Diese Woche</string>
+    <string name="tab_next">Nächste Woche</string>
+
+    <string name="snackbar_msg_error">Fehler beim Laden. </string>
+    <string name="snackbar_msg_error_action">Wiederholen</string>
+
+    <string name="text_view_empty">Noch nichts geladen.</string>
+
+    <string name="dialog_image">Icon</string>
+    <string name="dialog_app">@string/app_name</string>
+    <string name="dialog_text">Erstellt und veröffentlicht von Marcel unter GPLv3 open source Lizens. Ernöglicht durch den Englisch Lk 2016/2017 der Einhardschule Seligenstadt.</string>
+</resources>

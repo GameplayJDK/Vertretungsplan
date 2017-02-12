@@ -1,0 +1,57 @@
+<!--
+  ~     Vertretungsplan Android App
+  ~     Copyright (C) 2017  GameplayJDK
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+    <string name="app_name">Vertretungsplan</string>
+    <string name="title_activity_item_list">@string/app_name</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="menu_select_class">Select class…</string>
+    <string name="menu_about">About</string>
+
+    <string name="nav_last_time">Never</string>
+
+    <string name="nav_class">Classes</string>
+
+    <string name="tab_current">Current Week</string>
+    <string name="tab_next">Next Week</string>
+
+    <string name="snackbar_msg_error">Failed to fetch data. </string>
+    <string name="snackbar_msg_error_action">Retry</string>
+
+    <string name="item_field_hour" translatable="false">Hour</string>
+    <string name="item_field_insteadof" translatable="false">InsteadOf</string>
+    <string name="item_field_room" translatable="false">Room</string>
+    <string name="item_field_type" translatable="false">Type</string>
+    <string name="item_field_subject" translatable="false">Subject</string>
+    <string name="item_field_teacher" translatable="false">Teacher</string>
+    <string name="item_field_info" translatable="false">Info</string>
+
+    <string name="item_field_first" translatable="false">First</string>
+    <string name="item_field_second" translatable="false">Second</string>
+
+    <string name="item_field_title" translatable="false">Title</string>
+
+    <string name="text_view_empty">Nothing loaded yet.</string>
+
+    <string name="dialog_image">App icon</string>
+    <string name="dialog_app">@string/app_name</string>
+    <string name="dialog_text">Created and published by Marcel under GPLv3 open source license. Made possible by the English Lk of 2016/2017 from Einhardschule Seligenstadt.</string>
+</resources>

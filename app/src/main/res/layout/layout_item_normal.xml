@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~     Vertretungsplan Android App
+  ~     Copyright (C) 2017  GameplayJDK
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/list_item_padding"
+    android:paddingStart="@dimen/list_item_padding"
+    android:paddingEnd="@dimen/list_item_padding"
+    android:paddingBottom="@dimen/list_item_bottom_padding"
+    android:background="@color/colorListLight">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/list_item_text_bottom_margin">
+
+        <TextView
+            android:id="@+id/item_hour"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorListDark"
+            android:text="@string/item_field_hour"
+            android:textSize="@dimen/list_item_primary_text_size"
+            android:textColor="@android:color/primary_text_light" />
+
+        <TextView
+            android:id="@+id/item_insteadof"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@color/colorListDark"
+            android:text="@string/item_field_insteadof"
+            android:textSize="@dimen/list_item_primary_text_size"
+            android:textColor="@android:color/primary_text_light" />
+
+        <TextView
+            android:id="@+id/item_room"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@color/colorListDark"
+            android:text="@string/item_field_room"
+            android:textSize="@dimen/list_item_primary_text_size"
+            android:textColor="@android:color/primary_text_light" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/list_item_text_bottom_margin"
+        android:paddingStart="@dimen/list_item_text_padding"
+        android:paddingEnd="@dimen/list_item_text_padding">
+
+        <TextView
+            android:id="@+id/item_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/item_field_type"
+            android:textSize="@dimen/list_item_secondary_text_size"
+            android:textColor="@android:color/secondary_text_light" />
+
+        <TextView
+            android:id="@+id/item_subject"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/item_field_subject"
+            android:textSize="@dimen/list_item_secondary_text_size"
+            android:textColor="@android:color/secondary_text_light" />
+
+        <TextView
+            android:id="@+id/item_teacher"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/item_field_teacher"
+            android:textSize="@dimen/list_item_secondary_text_size"
+            android:textColor="@android:color/secondary_text_light" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/list_item_text_padding"
+        android:paddingEnd="@dimen/list_item_text_padding">
+
+        <TextView
+            android:id="@+id/item_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/item_field_info"
+            android:layout_weight="1"
+            android:textSize="@dimen/list_item_secondary_text_size"
+            android:textColor="@android:color/secondary_text_light" />
+
+    </LinearLayout>
+
+</LinearLayout>
