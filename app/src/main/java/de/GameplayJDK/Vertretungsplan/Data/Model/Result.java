@@ -138,7 +138,7 @@ public class Result {
         }
 
         public boolean hasDate() {
-            return this.mDate.isEmpty();
+            return !this.mDate.isEmpty();
         }
 
         public String getWeek() {
@@ -150,15 +150,15 @@ public class Result {
         }
 
         public boolean hasWeek() {
-            return this.mWeek.isEmpty();
+            return !this.mWeek.isEmpty();
         }
 
         public boolean isWeekA() {
-            return this.getWeek().equals("A");
+            return this.mWeek.equals("A");
         }
 
         public boolean isWeekB() {
-            return this.getWeek().equals("B");
+            return this.mWeek.equals("B");
         }
 
         public static List<Day.ListItem> flatten(ParentClass parentClass) {
