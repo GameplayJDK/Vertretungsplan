@@ -65,7 +65,7 @@
         <div class="flex-center position-ref full-height">
             <div class="content">
                 <div class="title">
-                    Vertretungsplan <sup>1.0</sup> <!-- Take care of updating the version! -->
+                    Vertretungsplan <sup>1.1</sup> <!-- Take care of updating the version! -->
                 </div>
 
                 <div class="links">
