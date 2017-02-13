@@ -20,10 +20,8 @@ package de.GameplayJDK.Vertretungsplan.Activity.List.Fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,12 +29,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import de.GameplayJDK.Vertretungsplan.Activity.List.Fragment.Extra.ChildSwipeRefreshLayout;
 import de.GameplayJDK.Vertretungsplan.Activity.List.Fragment.Extra.ListItemArrayAdapter;
 import de.GameplayJDK.Vertretungsplan.Activity.List.ListFragment;
-import de.GameplayJDK.Vertretungsplan.Activity.List.Listener.OnChildViewCreatedListener;
 import de.GameplayJDK.Vertretungsplan.Data.Model.Result;
 import de.GameplayJDK.Vertretungsplan.R;
 
@@ -50,7 +47,7 @@ public class ItemListFragment extends Fragment implements ItemListContract.View 
 
     private ItemListContract.Presenter mPresenter;
 
-    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private ChildSwipeRefreshLayout mChildSwipeRefreshLayout;
 
     private ListView mListView;
 
@@ -110,9 +107,9 @@ public class ItemListFragment extends Fragment implements ItemListContract.View 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_item_list, container, false);
 
-        this.mSwipeRefreshLayout = (SwipeRefreshLayout) root.findViewById(R.id.swipe_refresh_layout);
-        this.mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
-        this.mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        this.mChildSwipeRefreshLayout = (ChildSwipeRefreshLayout) root.findViewById(R.id.child_swipe_refresh_layout);
+        this.mChildSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
+        this.mChildSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 mPresenter.loadResult(true, false, true);
@@ -124,6 +121,8 @@ public class ItemListFragment extends Fragment implements ItemListContract.View 
 
         this.mLinearLayoutEmpty = (LinearLayout) root.findViewById(R.id.linear_layout_empty);
         this.mTextViewEmpty = (TextView) root.findViewById(R.id.text_view_empty);
+
+        this.mChildSwipeRefreshLayout.setChildView(this.mListView);
 
         return root;
     }
@@ -156,10 +155,10 @@ public class ItemListFragment extends Fragment implements ItemListContract.View 
             return;
         }
 
-        this.mSwipeRefreshLayout.post(new Runnable() {
+        this.mChildSwipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
-                mSwipeRefreshLayout.setRefreshing(active);
+                mChildSwipeRefreshLayout.setRefreshing(active);
             }
         });
     }
@@ -174,6 +173,20 @@ public class ItemListFragment extends Fragment implements ItemListContract.View 
 
         this.mListView.setVisibility(View.GONE);
         this.mLinearLayoutEmpty.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void clearResultItemList() {
+        View root = super.getView();
+
+        if (root == null) {
+            return;
+        }
+
+        this.mListView.setVisibility(View.VISIBLE);
+        this.mLinearLayoutEmpty.setVisibility(View.GONE);
+
+        this.mListAdapter.clear();
     }
 
     @Override

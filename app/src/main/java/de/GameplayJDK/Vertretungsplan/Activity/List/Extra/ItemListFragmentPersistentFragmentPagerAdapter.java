@@ -21,7 +21,6 @@ package de.GameplayJDK.Vertretungsplan.Activity.List.Extra;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 
 import de.GameplayJDK.Vertretungsplan.Activity.List.Fragment.ItemListFragment;
 import de.GameplayJDK.Vertretungsplan.R;

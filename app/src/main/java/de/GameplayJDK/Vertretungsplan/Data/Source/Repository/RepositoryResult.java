@@ -19,7 +19,6 @@
 package de.GameplayJDK.Vertretungsplan.Data.Source.Repository;
 
 import android.content.Context;
-import android.util.Log;
 
 import de.GameplayJDK.Vertretungsplan.Data.Model.Result;
 import de.GameplayJDK.Vertretungsplan.Data.Source.Cache.DataSourceCacheResult;

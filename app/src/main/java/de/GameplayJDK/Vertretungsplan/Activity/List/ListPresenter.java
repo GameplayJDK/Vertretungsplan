@@ -18,8 +18,6 @@
 
 package de.GameplayJDK.Vertretungsplan.Activity.List;
 
-import android.util.Log;
-
 import java.util.List;
 
 import de.GameplayJDK.Vertretungsplan.Activity.List.Fragment.ItemListContract;
@@ -33,8 +31,6 @@ import de.GameplayJDK.Vertretungsplan.Mvp.Clean.UseCaseHandler;
  */
 
 public class ListPresenter implements ListContract.Presenter, ItemListContract.Presenter {
-
-    private static final int MAX_VIEW_COUNT = 2;
 
     private final ListContract.View mView;
     private final UseCaseHandler mUseCaseHandler;
@@ -111,6 +107,10 @@ public class ListPresenter implements ListContract.Presenter, ItemListContract.P
     private void loadResult(final boolean getNext, final boolean forceUpdate, final boolean showLoadingAnimation, final boolean showLoadingIndicator, int selectedList) {
         ItemListContract.View childView = (getNext ? (this.mChildViewNext) : (this.mChildViewCurrent));
 
+        if (forceUpdate) {
+            childView.showEmptyItemList();
+        }
+
         if (showLoadingAnimation) {
             this.mView.showLoadingAnimation(true);
         }
@@ -140,6 +140,10 @@ public class ListPresenter implements ListContract.Presenter, ItemListContract.P
 
                 if (!mView.isActive() || !childView.isActive()) {
                     return;
+                }
+
+                if (forceUpdate) {
+                    childView.clearResultItemList();
                 }
 
                 if (showLoadingAnimation) {

@@ -20,10 +20,8 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/nav_header_padding"
-    android:paddingStart="@dimen/nav_header_padding"
-    android:paddingEnd="@dimen/nav_header_padding"
-    android:paddingBottom="@dimen/nav_header_padding"
+    android:layout_marginTop="@dimen/nav_header_margin"
+    android:padding="@dimen/nav_header_padding"
     android:background="@drawable/border_item_list"
     android:text="@string/nav_last_time"
     android:textSize="@dimen/nav_header_text_size" />

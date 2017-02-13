@@ -40,6 +40,8 @@ public interface ItemListContract {
 
         void showEmptyItemList();
 
+        void clearResultItemList();
+
         void showResultItemList(List<Result.ParentClass.Day.ListItem> listItemList);
     }
 
