@@ -2,6 +2,9 @@
 
 namespace App\Http\Fetcher;
 
+use Carbon\Carbon;
+use Exception;
+
 use Curl\Curl;
 use RefineDom\Document;
 
@@ -46,6 +49,8 @@ class EssFetcher implements Fetcher
         $this->authPassword = $this->data['auth']['password'];
 
         $this->ignore = $this->data['ignore'];
+
+        $this->motd = $this->data['motd'];
 
         $this->curl = $this->getCurl();
     }
@@ -229,6 +234,23 @@ class EssFetcher implements Fetcher
             $tmpInfo = explode(' ', $tmpInfo);
 
             $fieldParentClassDate = (count($tmpInfo) > 0) ? $tmpInfo[0] : '';
+
+            if (!empty($fieldParentClassDate))
+            {
+                try
+                {
+                    $carbonDate = Carbon::parse($fieldParentClassDate);
+                    $carbonDate->subDays(4);
+                    $carbonDate = $carbonDate->format('d.m.Y');
+
+                    $fieldParentClassDate = $carbonDate;
+                }
+                catch (Exception $ex)
+                {
+                    $fieldParentClassDate = '';
+                }
+            }
+
             $fieldParentClass->setDate($fieldParentClassDate);
 
             $fieldParentClassWeek = (count($tmpInfo) > 1) ? $tmpInfo[1] : '';

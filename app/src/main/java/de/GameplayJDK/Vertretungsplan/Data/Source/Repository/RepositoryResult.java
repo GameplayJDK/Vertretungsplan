@@ -65,8 +65,8 @@ public class RepositoryResult implements DataSourceResult {
 
     @Override
     public void getResultCurrent(final GetResultCallback callback) {
-        if (this.mDataSourceCache.isDirty()) {
-            this.mDataSourceCache.setDirty(false);
+        if (this.mDataSourceCache.isDirtyCurrent()) {
+            this.mDataSourceCache.setDirtyCurrent(false);
 
             if (this.mDataSourceRemote.isAvailable()) {
                 this.mDataSourceRemote.getResultCurrent(new GetResultCallback() {
@@ -124,8 +124,8 @@ public class RepositoryResult implements DataSourceResult {
 
     @Override
     public void getResultNext(final GetResultCallback callback) {
-        if (this.mDataSourceCache.isDirty()) {
-            this.mDataSourceCache.setDirty(false);
+        if (this.mDataSourceCache.isDirtyNext()) {
+            this.mDataSourceCache.setDirtyNext(false);
 
             if (this.mDataSourceRemote.isAvailable()) {
                 this.mDataSourceRemote.getResultNext(new GetResultCallback() {
@@ -186,18 +186,18 @@ public class RepositoryResult implements DataSourceResult {
         this.mDataSourceRemote.setApplicationContext(context);
     }
 
-    public void setDirty(boolean mDirty) {
-        this.mDataSourceCache.setDirty(mDirty);
-    }
-
     public void getResultCurrent(GetResultCallback callback, boolean dirty) {
-        this.setDirty(dirty);
+        if (this.mDataSourceCache.isAvailableCurrent()) {
+            this.mDataSourceCache.setDirtyCurrent(dirty);
+        }
 
         this.getResultCurrent(callback);
     }
 
     public void getResultNext(GetResultCallback callback, boolean dirty) {
-        this.setDirty(dirty);
+        if (this.mDataSourceCache.isAvailableNext()) {
+            this.mDataSourceCache.setDirtyNext(dirty);
+        }
 
         this.getResultNext(callback);
     }

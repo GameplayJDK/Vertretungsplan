@@ -124,12 +124,10 @@ public class RepositoryHost implements DataSourceHost {
         this.mDataSourceRemote.setApplicationContext(context);
     }
 
-    public void setDirty(boolean mDirty) {
-        this.mDataSourceCache.setDirty(mDirty);
-    }
-
     public void getHost(GetHostCallback callback, boolean dirty) {
-        this.setDirty(dirty);
+        if (this.mDataSourceCache.isAvailable()) {
+            this.mDataSourceCache.setDirty(dirty);
+        }
 
         this.getHost(callback);
     }

@@ -47,10 +47,10 @@ ext {
     targetSdkVersion = 24
 
     compileSdkVersion = 24
-    buildToolsVersion = '25.0.1'
+    buildToolsVersion = '25.0.2'
 
     // Dependencies
-    supportLibraryVersion = '25.0.1'
+    supportLibraryVersion = '25.1.1'
 
     gsonVersion = '2.8.0'
     volleyVersion = '1.0.0'

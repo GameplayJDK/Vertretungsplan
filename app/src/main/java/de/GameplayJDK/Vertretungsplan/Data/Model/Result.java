@@ -137,12 +137,20 @@ public class Result {
             this.mDate = mDate;
         }
 
+        public boolean hasDate() {
+            return this.mDate.isEmpty();
+        }
+
         public String getWeek() {
             return this.mWeek;
         }
 
         public void setWeek(String mWeek) {
             this.mWeek = mWeek;
+        }
+
+        public boolean hasWeek() {
+            return this.mWeek.isEmpty();
         }
 
         public boolean isWeekA() {

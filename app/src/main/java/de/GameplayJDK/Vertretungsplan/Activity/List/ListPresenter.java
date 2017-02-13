@@ -93,7 +93,9 @@ public class ListPresenter implements ListContract.Presenter, ItemListContract.P
     }
 
     private void loadResult(boolean forceUpdate) {
-        this.loadResult(forceUpdate || this.mFirstLoad, false, false);
+        this.loadResult(forceUpdate || this.mFirstLoad, false, true);
+
+        this.mFirstLoad = false;
     }
 
     @Override
@@ -151,6 +153,21 @@ public class ListPresenter implements ListContract.Presenter, ItemListContract.P
                 result = Result.map(result);
 
                 List<Result.ParentClass> parentClassList = result.getParentClassList();
+
+                if (parentClassList.size() == 0) {
+                    this.onError();
+
+                    return;
+                }
+
+                if (selectedList >= parentClassList.size()) {
+                    selectedList = parentClassList.size() - 1;
+                }
+
+                if (selectedList < 0) {
+                    selectedList = 0;
+                }
+
                 Result.ParentClass parentClass = parentClassList.get(selectedList);
 
                 List<Result.ParentClass.Day.ListItem> listItemList = Result.ParentClass.flatten(parentClass);
@@ -165,10 +182,14 @@ public class ListPresenter implements ListContract.Presenter, ItemListContract.P
 
                     Result.ParentClass.Day.Message infoMessage = new Result.ParentClass.Day.Message();
                     infoMessage.setFirst(parentClass.getDate());
-                    infoMessage.setLast("(" + parentClass.getWeek() + ")");
+                    infoMessage.setLast(parentClass.hasWeek() ? "(" + parentClass.getWeek() + ")" : "");
                     listItemList.add(1, infoMessage);
 
                     childView.showResultItemList(listItemList);
+                }
+
+                if (!forceUpdate) {
+                    return;
                 }
 
                 setTimestampMsNow();
@@ -202,6 +223,24 @@ public class ListPresenter implements ListContract.Presenter, ItemListContract.P
                 }
 
                 mView.showError(forceUpdate, showLoadingAnimation, showLoadingIndicator);
+            }
+
+            private void onError() {
+                ItemListContract.View childView = (getNext ? (mChildViewNext) : (mChildViewCurrent));
+
+                if (!mView.isActive() || !childView.isActive()) {
+                    return;
+                }
+
+                if (showLoadingAnimation) {
+                    mView.showLoadingAnimation(false);
+                }
+
+                if (showLoadingIndicator) {
+                    childView.showLoadingIndicator(false);
+                }
+
+                mView.showError();
             }
         });
     }

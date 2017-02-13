@@ -41,5 +41,5 @@
 
     <string name="dialog_image">Icon</string>
     <string name="dialog_app">@string/app_name</string>
-    <string name="dialog_text">Erstellt und veröffentlicht von Marcel unter GPLv3 open source Lizens. Ernöglicht durch den Englisch Lk 2016/2017 der Einhardschule Seligenstadt.</string>
+    <string name="dialog_text">Erstellt und veröffentlicht von Marcel unter GPLv3 open source Lizens. Ermöglicht durch den Englisch Lk 2016/2017 der Einhardschule Seligenstadt.</string>
 </resources>

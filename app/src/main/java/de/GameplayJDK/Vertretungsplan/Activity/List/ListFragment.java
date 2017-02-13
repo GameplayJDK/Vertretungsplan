@@ -121,6 +121,8 @@ public class ListFragment extends Fragment implements ListContract.View, OnChild
             @Override
             public void onPageSelected(int position) {
                 mPresenter.setSelectedTab(position);
+
+                mPresenter.loadResult(false, false, false);
             }
         });
 
@@ -251,18 +253,6 @@ public class ListFragment extends Fragment implements ListContract.View, OnChild
             return;
         }
 
-        if (this.mActivityDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-            this.mActivityDrawerLayout.closeDrawer(GravityCompat.START);
-        }
-
-        if (selectedItem > parentClassList.size()) {
-            selectedItem = parentClassList.size();
-        }
-
-        if (selectedItem < 0) {
-            selectedItem = 0;
-        }
-
         List<String> stringList = new ArrayList<String>();
 
         for (Result.ParentClass parentClass : parentClassList) {
@@ -302,6 +292,18 @@ public class ListFragment extends Fragment implements ListContract.View, OnChild
         } else {
             this.mActivityNavigationViewHeader.setText(DateUtils.getRelativeTimeSpanString(timestampMs, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS));
         }
+    }
+
+    @Override
+    public void showError() {
+        View root = super.getView();
+
+        if (root == null) {
+            return;
+        }
+
+        Snackbar snackbar = Snackbar.make(this.mActivityCoordinatorLayout, R.string.snackbar_msg_error, Snackbar.LENGTH_SHORT);
+        snackbar.show();
     }
 
     @Override

@@ -70,9 +70,7 @@ public class DataSourceCacheHost implements DataSourceCache, DataSourceHost {
     }
 
     public void setDirty(boolean mDirty) {
-        if (!this.mDirty) {
-            this.mDirty = mDirty;
-        }
+        this.mDirty = mDirty;
     }
 
     @Override

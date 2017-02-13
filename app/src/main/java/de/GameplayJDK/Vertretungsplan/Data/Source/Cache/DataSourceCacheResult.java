@@ -29,13 +29,15 @@ public class DataSourceCacheResult implements DataSourceCache, DataSourceResult 
 
     private static DataSourceCacheResult sInstance;
 
-    private boolean mDirty;
+    private boolean mDirtyCurrent;
+    private boolean mDirtyNext;
 
     private Result mResultCurrent;
     private Result mResultNext;
 
     private DataSourceCacheResult() {
-        this.mDirty = false;
+        this.mDirtyCurrent = false;
+        this.mDirtyNext = false;
 
         this.mResultCurrent = null;
         this.mResultNext = null;
@@ -82,14 +84,29 @@ public class DataSourceCacheResult implements DataSourceCache, DataSourceResult 
         this.mResultNext = null;
     }
 
-    public boolean isDirty() {
-        return this.mDirty;
+    public boolean isDirtyCurrent() {
+        return this.mDirtyCurrent;
     }
 
-    public void setDirty(boolean mDirty) {
-        if (!this.mDirty) {
-            this.mDirty = mDirty;
-        }
+    public boolean isDirtyNext() {
+        return this.mDirtyNext;
+    }
+
+    public boolean isDirty() {
+        return (this.mDirtyCurrent || this.mDirtyNext);
+    }
+
+    public void setDirtyCurrent(boolean dirty) {
+        this.mDirtyCurrent = dirty;
+    }
+
+    public void setDirtyNext(boolean dirty) {
+        this.mDirtyNext = dirty;
+    }
+
+    public void setDirty(boolean dirty) {
+        this.mDirtyCurrent = dirty;
+        this.mDirtyNext = dirty;
     }
 
     @Override
