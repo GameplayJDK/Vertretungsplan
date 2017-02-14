@@ -53,7 +53,7 @@ public class UseCaseHandler {
         });
     }
 
-    public <V extends UseCase.ResponseValue, W extends UseCase.ErrorResponseValue> void notifyResponse(final V responseValue, final UseCase.UseCaseCallback<V, W> useCaseCallback) {
+    private <V extends UseCase.ResponseValue, W extends UseCase.ErrorResponseValue> void notifyResponse(final V responseValue, final UseCase.UseCaseCallback<V, W> useCaseCallback) {
         this.mUseCaseScheduler.notifyResponse(responseValue, useCaseCallback);
     }
 

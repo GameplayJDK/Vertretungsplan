@@ -88,20 +88,20 @@ public class DataSourceCacheResult implements DataSourceCache, DataSourceResult 
         return this.mDirtyCurrent;
     }
 
-    public boolean isDirtyNext() {
-        return this.mDirtyNext;
-    }
-
-    public boolean isDirty() {
-        return (this.mDirtyCurrent || this.mDirtyNext);
-    }
-
     public void setDirtyCurrent(boolean dirty) {
         this.mDirtyCurrent = dirty;
     }
 
+    public boolean isDirtyNext() {
+        return this.mDirtyNext;
+    }
+
     public void setDirtyNext(boolean dirty) {
         this.mDirtyNext = dirty;
+    }
+
+    public boolean isDirty() {
+        return (this.mDirtyCurrent || this.mDirtyNext);
     }
 
     public void setDirty(boolean dirty) {
