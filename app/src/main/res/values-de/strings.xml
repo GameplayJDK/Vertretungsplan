@@ -38,6 +38,7 @@
     <string name="snackbar_msg_error_action">Wiederholen</string>
 
     <string name="text_view_empty">Noch nichts geladen.</string>
+    <string name="text_view_working">Lade…</string>
 
     <string name="dialog_image">Icon</string>
     <string name="dialog_app">@string/app_name</string>

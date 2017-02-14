@@ -50,6 +50,7 @@
     <string name="item_field_title" translatable="false">Title</string>
 
     <string name="text_view_empty">Nothing loaded yet.</string>
+    <string name="text_view_working">Loading…</string>
 
     <string name="dialog_image">App icon</string>
     <string name="dialog_app">@string/app_name</string>
