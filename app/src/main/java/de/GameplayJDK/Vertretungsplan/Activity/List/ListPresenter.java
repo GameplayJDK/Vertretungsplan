@@ -18,15 +18,11 @@
 
 package de.GameplayJDK.Vertretungsplan.Activity.List;
 
-import android.util.Log;
-
 import java.util.List;
 
 import de.GameplayJDK.Vertretungsplan.Activity.List.Fragment.ItemListContract;
 import de.GameplayJDK.Vertretungsplan.Activity.List.UseCase.UseCaseGetResult;
 import de.GameplayJDK.Vertretungsplan.Data.Model.Result;
-import de.GameplayJDK.Vertretungsplan.Data.Source.Remote.DataSourceRemoteResult;
-import de.GameplayJDK.Vertretungsplan.Data.Source.Repository.RepositoryResult;
 import de.GameplayJDK.Vertretungsplan.Mvp.Clean.UseCase;
 import de.GameplayJDK.Vertretungsplan.Mvp.Clean.UseCaseHandler;
 
@@ -131,6 +127,8 @@ public class ListPresenter implements ListContract.Presenter, ItemListContract.P
                 Result result = response.getResult();
                 UseCaseGetResult.RequestValue requestValue = response.getRequestValue();
 
+                boolean updated = response.isUpdated();
+
                 boolean getNext = requestValue.isGetNext();
                 boolean forceUpdate = requestValue.isForceUpdate();
                 boolean showLoadingAnimation = requestValue.isShowLoadingAnimation();
@@ -193,7 +191,14 @@ public class ListPresenter implements ListContract.Presenter, ItemListContract.P
                     childView.showResultItemList(listItemList);
                 }
 
-                if (!forceUpdate) {
+                if (forceUpdate) {
+                    // when not updated, though an update is forced
+                    if (!updated) {
+                        mView.showError();
+
+                        return;
+                    }
+                } else {
                     return;
                 }
 

@@ -307,6 +307,18 @@ public class ListFragment extends Fragment implements ListContract.View, OnChild
     }
 
     @Override
+    public void showError() {
+        View root = super.getView();
+
+        if (root == null) {
+            return;
+        }
+
+        Snackbar snackbar = Snackbar.make(this.mActivityCoordinatorLayout, R.string.snackbar_msg_error, Snackbar.LENGTH_SHORT);
+        snackbar.show();
+    }
+
+    @Override
     public void showError(final boolean forceUpdate, final boolean showLoadingAnimation, final boolean showLoadingIndicator) {
         View root = super.getView();
 

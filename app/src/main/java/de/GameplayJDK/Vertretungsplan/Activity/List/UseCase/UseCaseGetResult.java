@@ -20,6 +20,7 @@ package de.GameplayJDK.Vertretungsplan.Activity.List.UseCase;
 
 import de.GameplayJDK.Vertretungsplan.Data.Model.Result;
 import de.GameplayJDK.Vertretungsplan.Data.Source.DataSourceResult;
+import de.GameplayJDK.Vertretungsplan.Data.Source.Remote.DataSourceRemoteResult;
 import de.GameplayJDK.Vertretungsplan.Data.Source.Repository.RepositoryResult;
 import de.GameplayJDK.Vertretungsplan.Mvp.Clean.UseCase;
 
@@ -45,10 +46,13 @@ public class UseCaseGetResult extends UseCase<UseCaseGetResult.RequestValue, Use
         boolean forceUpdate = requestValue.isForceUpdate();
         boolean getNext = requestValue.isGetNext();
 
+        // only mark as updated if an update is forced and network is available
+        final boolean updated = forceUpdate && DataSourceRemoteResult.getInstance().isAvailable();
+
         DataSourceResult.GetResultCallback callback = new DataSourceResult.GetResultCallback() {
             @Override
             public void onSuccess(Result result) {
-                ResponseValue responseValue = new ResponseValue(result, requestValue);
+                ResponseValue responseValue = new ResponseValue(result, requestValue, updated);
 
                 getUseCaseCallback().onSuccess(responseValue);
             }
@@ -112,9 +116,13 @@ public class UseCaseGetResult extends UseCase<UseCaseGetResult.RequestValue, Use
         private final Result mResult;
         private final RequestValue mRequestValue;
 
-        public ResponseValue(Result result, RequestValue requestValue) {
+        private final boolean mUpdated;
+
+        public ResponseValue(Result result, RequestValue requestValue, boolean updated) {
             this.mResult = result;
             this.mRequestValue = requestValue;
+
+            this.mUpdated = updated;
         }
 
         public Result getResult() {
@@ -123,6 +131,10 @@ public class UseCaseGetResult extends UseCase<UseCaseGetResult.RequestValue, Use
 
         public RequestValue getRequestValue() {
             return this.mRequestValue;
+        }
+
+        public boolean isUpdated() {
+            return this.mUpdated;
         }
     }
 

@@ -43,6 +43,8 @@ public interface ListContract {
 
         void showLastTime(long timestampMs);
 
+        void showError();
+
         void showError(boolean forceUpdate, boolean showLoadingAnimation, boolean showLoadingIndicator);
 
         void showAboutDialog();
