@@ -18,9 +18,6 @@
 
 package de.GameplayJDK.Vertretungsplan.Activity.List.Fragment;
 
-import de.GameplayJDK.Vertretungsplan.Activity.List.UseCase.UseCaseGetResult;
-import de.GameplayJDK.Vertretungsplan.Mvp.Clean.UseCaseHandler;
-
 /**
  * Created by GameplayJDK on 03.12.2016.
  */
@@ -29,11 +26,7 @@ public class ItemListPresenter implements ItemListContract.Presenter {
 
     private final ItemListContract.View mView;
 
-    public ItemListPresenter(ItemListContract.View view, boolean tabNext) {
-        this(view, UseCaseHandler.getInstance(), UseCaseGetResult.newInstance(), tabNext);
-    }
-
-    public ItemListPresenter(ItemListContract.View view, UseCaseHandler useCaseHandler, UseCaseGetResult useCaseGetResult, boolean tabNext) {
+    public ItemListPresenter(ItemListContract.View view) {
         this.mView = view;
         this.mView.setPresenter(this);
     }

@@ -104,17 +104,12 @@ public class DataSourceLocalResult implements DataSourceLocal, DataSourceResult 
         String content = "";
 
         if (file.exists()) {
-            int length = (int) file.length();
-
             try (FileReader fileReader = new FileReader(file)) {
-                char[] contentBuffer = new char[length];
+                int contentLength = -1;
+                char[] contentBuffer = new char[1024];
 
-                int contentLength = fileReader.read(contentBuffer);
-
-                if (contentLength != length) {
-                    content = "";
-                } else {
-                    content = new String(contentBuffer, 0, contentLength);
+                while ((contentLength = fileReader.read(contentBuffer)) > 0) {
+                    content += new String(contentBuffer, 0, contentLength);
                 }
             } catch (IOException ex) {
                 content = "";
@@ -140,10 +135,22 @@ public class DataSourceLocalResult implements DataSourceLocal, DataSourceResult 
         try (FileWriter fileWriter = new FileWriter(file)) {
             int contentLength = content.length();
 
-            char[] contentBuffer = content.toCharArray();
+            char[] contentBuffer = new char[1024];
 
-            fileWriter.write(contentBuffer, 0, contentLength);
-            fileWriter.flush();
+            int begin, end, offset, chunk = 0;
+            while ((chunk * contentBuffer.length) < contentLength) {
+                begin = chunk * contentBuffer.length;
+                end = begin + contentBuffer.length;
+                end = (end > contentLength) ? contentLength : end;
+                offset = end - begin;
+
+                content.getChars(begin, end, contentBuffer , 0);
+
+                fileWriter.write(contentBuffer, 0, offset);
+                fileWriter.flush();
+
+                chunk++;
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
         }

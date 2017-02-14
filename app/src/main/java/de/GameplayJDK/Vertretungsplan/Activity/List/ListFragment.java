@@ -119,7 +119,7 @@ public class ListFragment extends Fragment implements ListContract.View, OnChild
             public void onPageSelected(int position) {
                 mPresenter.setSelectedTab(position);
 
-                mPresenter.loadResult(false, false, false);
+                // mPresenter.loadResult(false, false, false);
             }
         });
 
@@ -243,6 +243,21 @@ public class ListFragment extends Fragment implements ListContract.View, OnChild
     }
 
     @Override
+    public void showEmptyList() {
+        View root = super.getView();
+
+        if (root == null) {
+            return;
+        }
+
+        Menu menu = this.mActivityNavigationView.getMenu();
+        MenuItem menuItem = menu.findItem(R.id.nav_class);
+
+        SubMenu subMenu = menuItem.getSubMenu();
+        subMenu.removeGroup(R.id.nav_class_list);
+    }
+
+    @Override
     public void showResultList(List<Result.ParentClass> parentClassList, int selectedItem) {
         View root = super.getView();
 
@@ -284,23 +299,11 @@ public class ListFragment extends Fragment implements ListContract.View, OnChild
             return;
         }
 
-        if (timestampMs < 0) {
+        if (timestampMs == 0) {
             this.mActivityNavigationViewHeader.setText(R.string.nav_last_time);
         } else {
             this.mActivityNavigationViewHeader.setText(DateUtils.getRelativeTimeSpanString(timestampMs, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS));
         }
-    }
-
-    @Override
-    public void showError() {
-        View root = super.getView();
-
-        if (root == null) {
-            return;
-        }
-
-        Snackbar snackbar = Snackbar.make(this.mActivityCoordinatorLayout, R.string.snackbar_msg_error, Snackbar.LENGTH_SHORT);
-        snackbar.show();
     }
 
     @Override

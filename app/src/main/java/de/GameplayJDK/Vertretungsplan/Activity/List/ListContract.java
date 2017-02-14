@@ -37,11 +37,11 @@ public interface ListContract {
 
         void showLoadingAnimation(boolean active);
 
+        void showEmptyList();
+
         void showResultList(List<Result.ParentClass> parentClassList, int selectedList);
 
         void showLastTime(long timestampMs);
-
-        void showError();
 
         void showError(boolean forceUpdate, boolean showLoadingAnimation, boolean showLoadingIndicator);
 

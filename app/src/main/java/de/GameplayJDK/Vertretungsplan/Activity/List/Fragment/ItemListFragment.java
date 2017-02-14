@@ -161,8 +161,6 @@ public class ItemListFragment extends Fragment implements ItemListContract.View 
                 mChildSwipeRefreshLayout.setRefreshing(active);
             }
         });
-
-        this.mTextViewEmpty.setText(active ? R.string.text_view_working : R.string.text_view_empty);
     }
 
     @Override
@@ -177,20 +175,6 @@ public class ItemListFragment extends Fragment implements ItemListContract.View 
         this.mLinearLayoutEmpty.setVisibility(View.VISIBLE);
 
         this.mTextViewEmpty.setText(R.string.text_view_empty);
-    }
-
-    @Override
-    public void clearResultItemList() {
-        View root = super.getView();
-
-        if (root == null) {
-            return;
-        }
-
-        this.mListView.setVisibility(View.VISIBLE);
-        this.mLinearLayoutEmpty.setVisibility(View.GONE);
-
-        this.mListAdapter.clear();
     }
 
     @Override

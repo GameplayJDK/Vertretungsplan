@@ -186,17 +186,17 @@ public class RepositoryResult implements DataSourceResult {
     }
 
     public void getResultCurrent(GetResultCallback callback, boolean dirty) {
-        if (this.mDataSourceCache.isAvailableCurrent()) {
-            this.mDataSourceCache.setDirtyCurrent(dirty);
-        }
+        dirty = dirty || !this.mDataSourceCache.isAvailableCurrent();
+
+        this.mDataSourceCache.setDirtyCurrent(dirty);
 
         this.getResultCurrent(callback);
     }
 
     public void getResultNext(GetResultCallback callback, boolean dirty) {
-        if (this.mDataSourceCache.isAvailableNext()) {
-            this.mDataSourceCache.setDirtyNext(dirty);
-        }
+        dirty = dirty || !this.mDataSourceCache.isAvailableNext();
+
+        this.mDataSourceCache.setDirtyNext(dirty);
 
         this.getResultNext(callback);
     }

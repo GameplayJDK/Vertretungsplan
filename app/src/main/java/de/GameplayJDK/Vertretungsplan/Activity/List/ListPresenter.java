@@ -18,11 +18,15 @@
 
 package de.GameplayJDK.Vertretungsplan.Activity.List;
 
+import android.util.Log;
+
 import java.util.List;
 
 import de.GameplayJDK.Vertretungsplan.Activity.List.Fragment.ItemListContract;
 import de.GameplayJDK.Vertretungsplan.Activity.List.UseCase.UseCaseGetResult;
 import de.GameplayJDK.Vertretungsplan.Data.Model.Result;
+import de.GameplayJDK.Vertretungsplan.Data.Source.Remote.DataSourceRemoteResult;
+import de.GameplayJDK.Vertretungsplan.Data.Source.Repository.RepositoryResult;
 import de.GameplayJDK.Vertretungsplan.Mvp.Clean.UseCase;
 import de.GameplayJDK.Vertretungsplan.Mvp.Clean.UseCaseHandler;
 
@@ -89,9 +93,7 @@ public class ListPresenter implements ListContract.Presenter, ItemListContract.P
     }
 
     private void loadResult(boolean forceUpdate) {
-        this.loadResult(forceUpdate || this.mFirstLoad, false, true);
-
-        this.mFirstLoad = false;
+        this.loadResult(forceUpdate, false, true);
     }
 
     @Override
@@ -100,16 +102,16 @@ public class ListPresenter implements ListContract.Presenter, ItemListContract.P
             showLoadingIndicator = false;
         }
 
+        forceUpdate = forceUpdate || this.mFirstLoad;
+
         this.loadResult(this.isSelectedTabNext(), forceUpdate, showLoadingAnimation, showLoadingIndicator, this.mSelectedList);
         this.loadResult(!this.isSelectedTabNext(), forceUpdate, showLoadingAnimation, showLoadingIndicator, this.mSelectedList);
+
+        this.mFirstLoad = false;
     }
 
     private void loadResult(final boolean getNext, final boolean forceUpdate, final boolean showLoadingAnimation, final boolean showLoadingIndicator, int selectedList) {
         ItemListContract.View childView = (getNext ? (this.mChildViewNext) : (this.mChildViewCurrent));
-
-        if (forceUpdate) {
-            childView.showEmptyItemList();
-        }
 
         if (showLoadingAnimation) {
             this.mView.showLoadingAnimation(true);
@@ -142,10 +144,6 @@ public class ListPresenter implements ListContract.Presenter, ItemListContract.P
                     return;
                 }
 
-                if (forceUpdate) {
-                    childView.clearResultItemList();
-                }
-
                 if (showLoadingAnimation) {
                     mView.showLoadingAnimation(false);
                 }
@@ -159,7 +157,9 @@ public class ListPresenter implements ListContract.Presenter, ItemListContract.P
                 List<Result.ParentClass> parentClassList = result.getParentClassList();
 
                 if (parentClassList.size() == 0) {
-                    this.onError();
+                    mView.showEmptyList();
+
+                    childView.showEmptyItemList();
 
                     return;
                 }
@@ -177,6 +177,7 @@ public class ListPresenter implements ListContract.Presenter, ItemListContract.P
                 List<Result.ParentClass.Day.ListItem> listItemList = Result.ParentClass.flatten(parentClass);
 
                 mView.showResultList(parentClassList, selectedList);
+
                 if (listItemList.isEmpty()) {
                     childView.showEmptyItemList();
                 } else {
@@ -227,24 +228,6 @@ public class ListPresenter implements ListContract.Presenter, ItemListContract.P
                 }
 
                 mView.showError(forceUpdate, showLoadingAnimation, showLoadingIndicator);
-            }
-
-            private void onError() {
-                ItemListContract.View childView = (getNext ? (mChildViewNext) : (mChildViewCurrent));
-
-                if (!mView.isActive() || !childView.isActive()) {
-                    return;
-                }
-
-                if (showLoadingAnimation) {
-                    mView.showLoadingAnimation(false);
-                }
-
-                if (showLoadingIndicator) {
-                    childView.showLoadingIndicator(false);
-                }
-
-                mView.showError();
             }
         });
     }
